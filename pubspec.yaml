@@ -38,6 +38,7 @@ dependencies:
   cloud_firestore: ^4.7.1
   syncfusion_flutter_datepicker: ^21.2.5
   http: ^0.13.6
+  badges: ^3.1.1
 
 
   # The following adds the Cupertino Icons font to your application.

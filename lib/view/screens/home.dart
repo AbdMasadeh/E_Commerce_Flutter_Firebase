@@ -1,12 +1,16 @@
-import 'package:final_project/view/screens/home/search.dart';
-import 'package:final_project/widgets/card_item.dart';
+import 'package:final_project/logic/controller/cart_controller.dart';
+import 'package:final_project/widgets/home/search.dart';
+import 'package:final_project/widgets/home/card_item.dart';
 import 'package:final_project/widgets/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../constants/constants.dart';
+import '../../constants/constants.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+
+  final cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {

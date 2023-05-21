@@ -4,16 +4,16 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:final_project/services/product_services.dart';
 
-import '../../model/product_models.dart';
+import '../../model/product_model.dart';
 
 class ProductController extends GetxController {
-  var productList = <ProductModels>[].obs;
-  var favouritesList = <ProductModels>[].obs;
+  var productList = <ProductModel>[].obs;
+  var favouritesList = <ProductModel>[].obs;
   var isLoading = true.obs;
   var storage = GetStorage();
 
   //search
-  var searchList = <ProductModels>[].obs;
+  var searchList = <ProductModel>[].obs;
   TextEditingController searchTextController = TextEditingController();
 
   @override
@@ -24,7 +24,7 @@ class ProductController extends GetxController {
 
     if (storedShopping != null) {
       favouritesList =
-          storedShopping.map((e) => ProductModels.fromJson(e)).toList().obs;
+          storedShopping.map((e) => ProductModel.fromJson(e)).toList().obs;
     }
     getProducts();
   }
@@ -41,27 +41,7 @@ class ProductController extends GetxController {
       isLoading(false);
     }
   }
-//
-//   void manageFavourites(int productId) async {
-//     var existingIndex =
-//         favouritesList.indexWhere((element) => element.id == productId);
-//
-//     if (existingIndex >= 0) {
-//       favouritesList.removeAt(existingIndex);
-//       await storage.remove("isFavouritesList");
-//     } else {
-//       favouritesList
-//           .add(productList.firstWhere((element) => element.id == productId));
-//
-//       await storage.write("isFavouritesList", favouritesList);
-//     }
-//   }
-//
-//   bool isFavourites(int productId) {
-//     return favouritesList.any((element) => element.id == productId);
-//   }
-//
-// //Search Bar Logic
+//Search Bar Logic
 //
 //   void addSearchToList(String searchName) {
 //     searchName = searchName.toLowerCase();

@@ -1,3 +1,4 @@
+import 'package:final_project/widgets/text_styles.dart';
 import 'package:flutter/material.dart';
 
 import 'package:final_project/widgets/custom_button.dart';
@@ -190,7 +191,6 @@ class SignUpPage extends StatelessWidget {
                       return CustomElevatedButton(
                           buttonWidth: 140,
                           buttonHeight: 50,
-                          text: "Sign Up",
                           function: () {
                             if (authKey.currentState!.validate()) {
                               String userName = userNameController.text.trim();
@@ -209,7 +209,7 @@ class SignUpPage extends StatelessWidget {
                                 password: password,
                               );
                             }
-                          });
+                          }, childWidget: customText("Sign Up", Colors.white, 20, false),);
                     }),
                     const SizedBox(height: 20),
                   ],

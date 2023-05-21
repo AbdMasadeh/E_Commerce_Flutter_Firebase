@@ -4,12 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 Widget welcomeTextStyle(
     String text, double size, Color color) {
   return Center(
-    child: Container(
-      child: Center(
-        child: Text(text,
-            style: GoogleFonts.baloo2(
-                textStyle: TextStyle(fontSize: size, color: color,))),
-      ),
+    child: Center(
+      child: Text(text,
+          style: GoogleFonts.baloo2(
+              textStyle: TextStyle(fontSize: size, color: color,))),
     ),
   );
 }

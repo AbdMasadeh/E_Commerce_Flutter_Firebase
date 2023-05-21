@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-List<ProductModels> productModelsFromJson(String str) =>
-    List<ProductModels>.from(
-        json.decode(str).map((x) => ProductModels.fromJson(x)));
+List<ProductModel> productModelFromJson(String str) =>
+    List<ProductModel>.from(
+        json.decode(str).map((x) => ProductModel.fromJson(x)));
 
-String productModelsToJson(List<ProductModels> data) =>
+String productModelToJson(List<ProductModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class ProductModels {
-  ProductModels({
+class ProductModel {
+  ProductModel({
     required this.id,
     required this.title,
     required this.price,
@@ -26,7 +26,7 @@ class ProductModels {
   String image;
   Rating rating;
 
-  factory ProductModels.fromJson(Map<String, dynamic> json) => ProductModels(
+  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
         id: json["id"],
         title: json["title"],
         price: json["price"].toDouble(),

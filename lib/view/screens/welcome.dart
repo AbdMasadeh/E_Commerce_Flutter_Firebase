@@ -36,12 +36,13 @@ class WelcomePage extends StatelessWidget {
               ),
               const SizedBox(height: 130),
               CustomElevatedButton(
-                  buttonWidth: 140,
-                  buttonHeight: 50,
-                  text: "Get Started",
-                  function: () {
-                    Get.offNamed('/loginPage');
-                  }),
+                buttonWidth: 140,
+                buttonHeight: 50,
+                function: () {
+                  Get.offNamed('/loginPage');
+                },
+                childWidget: customText("Get Started", Colors.white, 20, false),
+              ),
               const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +50,7 @@ class WelcomePage extends StatelessWidget {
                   customText("Don't have an Account?", Colors.white, 18, false),
                   TextButton(
                       onPressed: () {
-                        Get.offNamed('SignUpPage',preventDuplicates:false);
+                        Get.offNamed('SignUpPage', preventDuplicates: false);
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(builder: (context) => SignUpPage()));

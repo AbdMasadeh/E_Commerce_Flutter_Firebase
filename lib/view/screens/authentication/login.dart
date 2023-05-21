@@ -92,7 +92,8 @@ class LoginPage extends StatelessWidget {
                       return CustomElevatedButton(
                           buttonWidth: 140,
                           buttonHeight: 50,
-                          text: "Sign In",
+                          childWidget:
+                              customText("Sign In", Colors.white, 20, false),
                           function: () {
                             Get.offNamed('/mainPage');
                             // if (authKey.currentState!.validate()) {

@@ -7,13 +7,13 @@ class CustomElevatedButton extends StatelessWidget {
       {Key? key,
       required this.buttonWidth,
       required this.buttonHeight,
-      required this.text,
-      required this.function})
+      required this.function,
+      required this.childWidget})
       : super(key: key);
   final double buttonWidth;
   final double buttonHeight;
-  final String text;
   final Function function;
+  final Widget childWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +21,18 @@ class CustomElevatedButton extends StatelessWidget {
       width: buttonWidth,
       height: buttonHeight,
       child: ElevatedButton(
-          onPressed: () {
-            function();
-          },
-          style: ElevatedButton.styleFrom(
+        onPressed: () {
+          function();
+        },
+        style: ElevatedButton.styleFrom(
             backgroundColor: mainColor,
-          ),
-          child: Center(
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 20, ),
-            ),
-          )),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            )),
+        child: Center(
+          child: childWidget,
+        ),
+      ),
     );
   }
 }
