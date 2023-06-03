@@ -55,8 +55,8 @@ class CartPage extends StatelessWidget {
                     ],
                   ),
                 ),
-          // bottomNavigationBar:
-          //     cartController.productsMap.isEmpty ? null : TotalProducts(),
+          bottomNavigationBar:
+              cartController.productsMap.isEmpty ? null : TotalProducts(),
         ),
       ),
     );

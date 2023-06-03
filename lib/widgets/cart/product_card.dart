@@ -88,12 +88,15 @@ class CartProductCard extends StatelessWidget {
                       color: Get.isDarkMode ? Colors.white : Colors.black,
                     ),
                   ),
-                  Text(
-                    "$quantity",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: 26,
+                    child: Text(
+                      "$quantity",
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   IconButton(

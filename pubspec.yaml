@@ -30,14 +30,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   get: ^4.6.5
   get_storage: ^2.1.1
+
+
   firebase_auth: ^4.6.0
   firebase_core: ^2.13.0
-  google_fonts: ^4.0.4
   cloud_firestore: ^4.7.1
-  syncfusion_flutter_datepicker: ^21.2.5
   http: ^0.13.6
+
+  google_fonts: ^4.0.4
+  syncfusion_flutter_datepicker: ^21.2.5
   badges: ^3.1.1
 
 

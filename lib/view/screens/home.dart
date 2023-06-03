@@ -1,4 +1,6 @@
 import 'package:final_project/logic/controller/cart_controller.dart';
+import 'package:final_project/logic/controller/product_controller.dart';
+import 'package:final_project/view/screens/product_details.dart';
 import 'package:final_project/widgets/home/search.dart';
 import 'package:final_project/widgets/home/card_item.dart';
 import 'package:final_project/widgets/text_styles.dart';
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
 
   final cartController = Get.put(CartController());
+  final productController = Get.put(ProductController());
 
   @override
   Widget build(BuildContext context) {

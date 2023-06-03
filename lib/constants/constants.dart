@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-var mainColor = Get.isDarkMode? Colors.grey[400]: Colors.purple;
+var mainColor = Get.isDarkMode? Colors.grey[400]: Colors.red;
 var backGroundColor = Get.isDarkMode? Colors.grey[600] : Colors.white;
 var textColor = Get.isDarkMode? Colors.white : Colors.black;
 

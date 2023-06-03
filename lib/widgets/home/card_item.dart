@@ -6,6 +6,7 @@ import 'package:final_project/logic/controller/cart_controller.dart';
 import 'package:final_project/widgets/text_styles.dart';
 import 'package:get/get.dart';
 import '../../logic/controller/product_controller.dart';
+import '../../view/screens/product_details.dart';
 
 class CardItem extends StatelessWidget {
   CardItem({Key? key}) : super(key: key);
@@ -35,11 +36,15 @@ class CardItem extends StatelessWidget {
             ),
             itemBuilder: (context, index) {
               return buildCardItems(
-                image: productController.productList[index].image,
-                price: productController.productList[index].price,
-                rate: productController.productList[index].rating.rate,
-                productModel: productController.productList[index],
-              );
+                  image: productController.productList[index].image,
+                  price: productController.productList[index].price,
+                  rate: productController.productList[index].rating.rate,
+                  productModel: productController.productList[index],
+                  onTap: () => Get.to(
+                        ProductDetails(
+                          productModel: productController.productList[index],
+                        ),
+                      ));
             },
           ),
         );
@@ -52,64 +57,68 @@ class CardItem extends StatelessWidget {
     required double price,
     required double rate,
     required ProductModel productModel,
+    required Function() onTap,
   }) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              spreadRadius: 3.0,
-              blurRadius: 5.0,
-            ),
-          ],
-        ),
-        child: Column(
-          children: [
-            //* This refers to the text above
-            SizedBox(
-              height: 30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const SizedBox(width: 10),
-                      customText("$rate", Colors.black, 15, false),
-                      const Icon(Icons.star_border),
-                    ],
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      cartController.addProductToCart(productModel);
-                    },
-                    icon: const Icon(Icons.add_shopping_cart_outlined),
-                  )
-                ],
+      child: InkWell(
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.shade300,
+                spreadRadius: 3.0,
+                blurRadius: 5.0,
               ),
-            ),
-            //* This refers to the image inside
-            Container(
-              margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
-              width: double.infinity,
-              height: 160,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: Colors.red),
-              child: Image.network(
-                image,
-                fit: BoxFit.fill,
+            ],
+          ),
+          child: Column(
+            children: [
+              //* This refers to the text above
+              SizedBox(
+                height: 30,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 10),
+                        customText("$rate", Colors.black, 15, false),
+                        const Icon(Icons.star_border),
+                      ],
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        cartController.addProductToCart(productModel);
+                      },
+                      icon: const Icon(Icons.add_shopping_cart_outlined),
+                    )
+                  ],
+                ),
               ),
-            ),
-            //* This refers to the text below
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.fromLTRB(10, 8, 10, 2),
-              child: customText("Price: $price \$", Colors.black, 15, false),
-            )
-          ],
+              //* This refers to the image inside
+              Container(
+                margin: const EdgeInsets.fromLTRB(2, 0, 2, 0),
+                width: double.infinity,
+                height: 160,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10), color: Colors.red),
+                child: Image.network(
+                  image,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              //* This refers to the text below
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.fromLTRB(10, 8, 10, 2),
+                child: customText("Price: $price \$", Colors.black, 15, false),
+              )
+            ],
+          ),
         ),
       ),
     );
