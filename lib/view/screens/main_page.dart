@@ -17,12 +17,11 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Obx(
-        () {
-          return Scaffold(
-            appBar: AppBar(
-              actions: [
-                Obx(() =>
-                badges.Badge(
+        () => Scaffold(
+          appBar: AppBar(
+            actions: [
+              Obx(
+                () => badges.Badge(
                   position: badges.BadgePosition.topEnd(top: 0, end: 3),
                   // badgeAnimation: const badges.BadgeAnimation.slide(
                   // ),
@@ -39,45 +38,45 @@ class Main extends StatelessWidget {
                     },
                     icon: const Icon(Icons.shopping_cart_outlined),
                   ),
-                ),)
+                ),
+              )
+            ],
+            title: Row(
+              children: [
+                const SizedBox(width: 100),
+                welcomeTextStyle('e-commerce', 30, Colors.white),
               ],
-              title: Row(
-                children: [
-                  const SizedBox(width: 100),
-                  welcomeTextStyle('e-commerce', 30, Colors.blue),
-                ],
+            ),
+            // centerTitle: true,
+            backgroundColor: Get.isDarkMode ? Colors.grey : mainColor,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            backgroundColor: Get.isDarkMode ? Colors.grey : mainColor,
+            currentIndex: mainController.currentIndex.value,
+            type: BottomNavigationBarType.fixed,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
+                label: "Home",
               ),
-              // centerTitle: true,
-              backgroundColor: Get.isDarkMode ? Colors.grey : mainColor,
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: mainColor,
-              currentIndex: mainController.currentIndex.value,
-              type: BottomNavigationBarType.fixed,
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  label: "Home",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart_outlined),
-                  label: "Cart",
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: "Settings",
-                ),
-              ],
-              onTap: (index) {
-                mainController.currentIndex.value = index;
-              },
-            ),
-            body: IndexedStack(
-              index: mainController.currentIndex.value,
-              children: mainController.tabs,
-            ),
-          );
-        },
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shopping_cart_outlined),
+                label: "Cart",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: "Settings",
+              ),
+            ],
+            onTap: (index) {
+              mainController.currentIndex.value = index;
+            },
+          ),
+          body: IndexedStack(
+            index: mainController.currentIndex.value,
+            children: mainController.tabs,
+          ),
+        ),
       ),
     );
   }

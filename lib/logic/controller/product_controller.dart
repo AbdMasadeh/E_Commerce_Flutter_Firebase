@@ -49,10 +49,8 @@ class ProductController extends GetxController {
 
     searchList.value = productList.where((search) {
       var searchTitle = search.title.toLowerCase();
-      var searchPrice = search.price.toString().toLowerCase();
 
-      return searchTitle.contains(searchName) ||
-          searchPrice.toString().contains(searchName);
+      return searchTitle.contains(searchName);
     }).toList();
 
     update();

@@ -9,7 +9,8 @@ class CustomTextField extends StatelessWidget {
       required this.action,
       required this.valid,
       required this.sufIcon,
-      required this.controller})
+      required this.controller,
+      required this.change})
       : super(key: key);
   final Icon icon;
   final IconButton sufIcon;
@@ -18,6 +19,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputAction action;
   final Function valid;
   final TextEditingController controller;
+  final Function change;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +30,9 @@ class CustomTextField extends StatelessWidget {
       width: 340,
       child: Center(
         child: TextFormField(
+          onChanged: (value) {
+            change(value);
+          },
           controller: controller,
           validator: (value) => valid(value),
           textInputAction: action,

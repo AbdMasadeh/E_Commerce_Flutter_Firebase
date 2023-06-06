@@ -31,10 +31,11 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeController().themeDataGet,
       // routes: appRoutes,
       getPages: appRoutes(),
-      initialRoute: FirebaseAuth.instance.currentUser != null ||
-              GetStorage().read<bool>('auth') == true
-          ? '/mainScreen'
-          : '/welcomePage',
+      initialRoute: '/welcomePage'
+      // FirebaseAuth.instance.currentUser != null ||
+      //         GetStorage().read<bool>('auth') == true
+      //     ? '/mainScreen'
+      //     : '/welcomePage',
     );
   }
 }

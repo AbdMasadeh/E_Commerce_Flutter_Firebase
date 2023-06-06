@@ -61,6 +61,7 @@ class LoginPage extends StatelessWidget {
                       hideText: false,
                       action: TextInputAction.next,
                       valid: (value) {},
+                      change: () {},
                     ),
                     GetBuilder<AuthController>(builder: (_) {
                       return CustomTextField(
@@ -78,11 +79,12 @@ class LoginPage extends StatelessWidget {
                         hideText: controller.isVisibility ? false : true,
                         action: TextInputAction.done,
                         valid: (value) {},
+                        change: () {},
                       );
                     }),
                     TextButton(
                       onPressed: () {
-                        // Get.toNamed('forgotPassword');
+                        Get.toNamed('forgotPassword');
                       },
                       child:
                           customText('Forgot Password?', textColor, 15, false),
@@ -95,16 +97,14 @@ class LoginPage extends StatelessWidget {
                           childWidget:
                               customText("Sign In", Colors.white, 20, false),
                           function: () {
-                            Get.offNamed('/mainPage');
-                            // if (authKey.currentState!.validate()) {
-                            //   String email = userNameController.text.trim();
-                            //   String password = passwordController.text;
-                            //   controller.signInFirebase(
-                            //     // userName: userName,
-                            //     password: password,
-                            //     email: email,
-                            //   );
-                            // }
+                            if (authKey.currentState!.validate()) {
+                              String email = userNameController.text.trim();
+                              String password = passwordController.text;
+                              controller.signInFirebase(
+                                password: password,
+                                email: email,
+                              );
+                            }
                           });
                     }),
                     const SizedBox(height: 200),

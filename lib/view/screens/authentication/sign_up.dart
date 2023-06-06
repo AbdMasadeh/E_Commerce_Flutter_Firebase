@@ -14,15 +14,15 @@ class SignUpPage extends StatelessWidget {
 
   final authKey = GlobalKey<FormState>();
 
-  final TextEditingController userNameController = TextEditingController();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController mobileController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController secPasswordController = TextEditingController();
 
-  final controller = Get.put(AuthController());
+  final authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -57,38 +57,22 @@ class SignUpPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     CustomTextField(
-                        controller: userNameController,
-                        icon: const Icon(Icons.account_circle_rounded),
-                        sufIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(null),
-                        ),
-                        hint: "User Name",
-                        hideText: false,
-                        action: TextInputAction.next,
-                        valid: (value) {
-                          if (value.toString().length <= 2 ||
-                              !RegExp(validationName).hasMatch(value)) {
-                            return 'Enter valid User name';
-                          } else {
-                            return null;
-                          }
-                        }),
-                    CustomTextField(
-                        controller: firstNameController,
-                        icon: const Icon(Icons.drive_file_rename_outline_sharp),
-                        hint: "First Name",
-                        sufIcon: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(null),
-                        ),
-                        hideText: false,
-                        action: TextInputAction.next,
-                        valid: (value) {
-                          if (value.toString().isEmpty) {
-                            return "First Name cannot be empty";
-                          }
-                        }),
+                      controller: firstNameController,
+                      icon: const Icon(Icons.drive_file_rename_outline_sharp),
+                      hint: "First Name",
+                      sufIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(null),
+                      ),
+                      hideText: false,
+                      action: TextInputAction.next,
+                      valid: (value) {
+                        if (value.toString().isEmpty) {
+                          return "First Name cannot be empty";
+                        }
+                      },
+                      change: () {},
+                    ),
                     CustomTextField(
                       controller: lastNameController,
                       icon: const Icon(Icons.drive_file_rename_outline_sharp),
@@ -104,6 +88,7 @@ class SignUpPage extends StatelessWidget {
                           return "Last Name cannot be empty";
                         }
                       },
+                      change: () {},
                     ),
                     CustomTextField(
                       controller: emailController,
@@ -122,6 +107,24 @@ class SignUpPage extends StatelessWidget {
                           return null;
                         }
                       },
+                      change: () {},
+                    ),
+                    CustomTextField(
+                      controller: mobileController,
+                      icon: const Icon(Icons.phone_android),
+                      sufIcon: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(null),
+                      ),
+                      hint: "Mobile Number",
+                      hideText: false,
+                      action: TextInputAction.next,
+                      valid: (value) {
+                        if (value.toString().isEmpty) {
+                          return "Invalid Mobile number";
+                        }
+                      },
+                      change: () {},
                     ),
                     CustomTextField(
                       controller: dateController,
@@ -138,6 +141,7 @@ class SignUpPage extends StatelessWidget {
                           return "Invalid Date";
                         }
                       },
+                      change: () {},
                     ),
                     GetBuilder<AuthController>(builder: (_) {
                       return CustomTextField(
@@ -146,13 +150,13 @@ class SignUpPage extends StatelessWidget {
                         hint: "Password",
                         sufIcon: IconButton(
                           onPressed: () {
-                            controller.visibility();
+                            authController.visibility();
                           },
-                          icon: controller.isVisibility
+                          icon: authController.isVisibility
                               ? const Icon(Icons.visibility_off)
                               : const Icon(Icons.visibility),
                         ),
-                        hideText: controller.isVisibility ? false : true,
+                        hideText: authController.isVisibility ? false : true,
                         action: TextInputAction.next,
                         valid: (value) {
                           if (value.toString().length < 6) {
@@ -161,6 +165,7 @@ class SignUpPage extends StatelessWidget {
                             return null;
                           }
                         },
+                        change: () {},
                       );
                     }),
                     CustomTextField(
@@ -169,13 +174,13 @@ class SignUpPage extends StatelessWidget {
                       hint: "Confirm Password",
                       sufIcon: IconButton(
                         onPressed: () {
-                          controller.visibility();
+                          authController.visibility();
                         },
-                        icon: controller.isVisibility
+                        icon: authController.isVisibility
                             ? const Icon(Icons.visibility_off)
                             : const Icon(Icons.visibility),
                       ),
-                      hideText: controller.isVisibility ? false : true,
+                      hideText: authController.isVisibility ? false : true,
                       action: TextInputAction.done,
                       valid: (value) {
                         if (secPasswordController.text ==
@@ -185,31 +190,34 @@ class SignUpPage extends StatelessWidget {
                           return 'Passwords don\'t match';
                         }
                       },
+                      change: () {},
                     ),
                     const SizedBox(height: 20),
                     GetBuilder<AuthController>(builder: (_) {
                       return CustomElevatedButton(
-                          buttonWidth: 140,
-                          buttonHeight: 50,
-                          function: () {
-                            if (authKey.currentState!.validate()) {
-                              String userName = userNameController.text.trim();
-                              String firstName =
-                                  firstNameController.text.trim();
-                              String lastName = lastNameController.text.trim();
-                              String email = emailController.text.trim();
-                              String date = dateController.text.trim();
-                              String password = passwordController.text;
-                              controller.signUpFirebase(
-                                userName: userName,
-                                firstName: firstName,
-                                lastName: lastName,
-                                email: email,
-                                date: date,
-                                password: password,
-                              );
-                            }
-                          }, childWidget: customText("Sign Up", Colors.white, 20, false),);
+                        buttonWidth: 140,
+                        buttonHeight: 50,
+                        function: () {
+                          if (authKey.currentState!.validate()) {
+                            String firstName = firstNameController.text.trim();
+                            String lastName = lastNameController.text.trim();
+                            String email = emailController.text.trim();
+                            String date = dateController.text.trim();
+                            String password = passwordController.text;
+                            String mobileNumber = mobileController.text.trim();
+                            authController.signUpFirebase(
+                              firstName: firstName,
+                              lastName: lastName,
+                              email: email,
+                              date: date,
+                              password: password,
+                              mobileNumber: mobileNumber,
+                            );
+                          }
+                        },
+                        childWidget:
+                            customText("Sign Up", Colors.white, 20, false),
+                      );
                     }),
                     const SizedBox(height: 20),
                   ],

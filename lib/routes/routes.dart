@@ -1,5 +1,6 @@
 import 'package:final_project/logic/bindings/product_bindings.dart';
 import 'package:final_project/view/screens/cart.dart';
+import 'package:final_project/view/screens/category.dart';
 import 'package:get/get.dart';
 import 'package:final_project/logic/bindings/auth_bindings.dart';
 import 'package:final_project/logic/bindings/main_bindings.dart';
@@ -32,5 +33,10 @@ appRoutes() => [
         name: '/cartPage',
         page: () => CartPage(),
         bindings: [AuthBinding(), ProductBinding()],
+      ),
+      GetPage(
+        name: '/categoryPage',
+        page: () => CategoryPage(),
+        bindings: [],
       ),
     ];

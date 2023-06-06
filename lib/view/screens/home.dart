@@ -55,6 +55,11 @@ class HomePage extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: customText("Categories", Colors.black, 20, false)),
           ),
+          ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/categoryPage');
+              },
+              child: const Text("Category")),
           CardItem(),
         ],
       ),

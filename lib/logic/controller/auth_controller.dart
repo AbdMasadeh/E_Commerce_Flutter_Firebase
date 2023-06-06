@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:final_project/view/screens/main_page.dart';
+import 'package:final_project/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -18,12 +17,12 @@ class AuthController extends GetxController {
   }
 
   void signUpFirebase({
-    required String userName,
     required String firstName,
     required String lastName,
     required String email,
     required String date,
     required String password,
+    required mobileNumber,
   }) async {
     try {
       final credential =
@@ -35,19 +34,16 @@ class AuthController extends GetxController {
           .collection('users')
           .doc(credential.user!.uid)
           .set({
-        'userName': userName,
         'firstName': firstName,
         'lastName': lastName,
         'dateOfBirth': date,
-        // 'mobileNumber' : mobileNumber,
+        'mobileNumber': mobileNumber,
       });
       update();
       Get.snackbar(
         "Signed Up successfully!",
         "Go to Login page",
         snackPosition: SnackPosition.BOTTOM,
-        // colorText:
-        // backgroundColor:
       );
       Get.offNamed('/loginPage');
     } on FirebaseAuthException catch (e) {
@@ -64,8 +60,6 @@ class AuthController extends GetxController {
         title,
         message,
         snackPosition: SnackPosition.BOTTOM,
-        // colorText:
-        // backgroundColor:
       );
     } catch (error) {
       Get.snackbar(
@@ -76,9 +70,7 @@ class AuthController extends GetxController {
     }
   }
 
-
   void signInFirebase({
-    // required String userName,
     required String email,
     required String password,
   }) async {
@@ -86,6 +78,8 @@ class AuthController extends GetxController {
       final credential =
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
+
+      getUserRecord();
 
       update();
       isSignedIn = true;
@@ -95,11 +89,8 @@ class AuthController extends GetxController {
         "Signed Up successfully!",
         "Go to Login page",
         snackPosition: SnackPosition.BOTTOM,
-        // colorText:
-        // backgroundColor:
       );
-      Get.offNamed('/homePage');
-      // Navigator.push(MaterialPageRoute(builder: (context) => HomePage()) as BuildContext,);
+      Get.offNamed('/mainPage');
     } on FirebaseAuthException catch (e) {
       String title = e.code;
       String message;
@@ -115,7 +106,6 @@ class AuthController extends GetxController {
         title,
         message,
         snackPosition: SnackPosition.BOTTOM,
-        // colorText:
         backgroundColor: Colors.white.withOpacity(0.3),
       );
     } catch (error) {
@@ -126,7 +116,6 @@ class AuthController extends GetxController {
       );
     }
   }
-
 
   // void resetPassword(String email) async {
   //   try {
@@ -158,15 +147,9 @@ class AuthController extends GetxController {
   //   }
   // }
 
-
   void signOutFirebase() async {
     try {
       await FirebaseAuth.instance.signOut();
-      // displayUserName.value = '';
-      // displayUserPhoto.value = '';
-      //displayUserEmail.value = '';
-      // isSignedIn = false;
-      // authBox.remove("auth");
       update();
       isSignedIn = false;
       authBox.remove("auth");
@@ -175,8 +158,6 @@ class AuthController extends GetxController {
         "Signed out successfully!",
         "",
         snackPosition: SnackPosition.BOTTOM,
-        // colorText:
-        // backgroundColor:
       );
 
       Get.offNamed('/welcomePage');
@@ -190,4 +171,14 @@ class AuthController extends GetxController {
       );
     }
   }
+
+  // void getUserInfo() async {
+  //   try {
+  //     final user = await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(.user!.uid).get();
+  //   } catch (error) {
+  //
+  //   }
+  // }
 }

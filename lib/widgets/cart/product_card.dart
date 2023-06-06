@@ -90,12 +90,14 @@ class CartProductCard extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 26,
-                    child: Text(
-                      "$quantity",
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Text(
+                        "$quantity",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
